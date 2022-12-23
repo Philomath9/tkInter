@@ -19,6 +19,33 @@ class keyboardKey:
     def getSpan(self):
         return self.span
 
+class testAnim:
+    def __init__(self, root, row, col):
+               #example of compositing use this for animated letters
+        self.root = root
+        img = Image.open('Assets/A.png').convert("RGBA")
+        back = Image.open('Assets/Nope.png').convert("RGBA")
+        back2 = Image.open('Assets/Yup.png').convert("RGBA")
+        c = Image.alpha_composite(back, img)
+        d = Image.alpha_composite(back2, img)
+        self.stateofanim = 0
+        #c.show()
+        self.image1 = ImageTk.PhotoImage(c)        # must keep a reference...wierd
+        self.image2 = ImageTk.PhotoImage(d)        # must keep a reference...wierd
+        self.label = tk.Label(root, image = self.image1)                
+        self.label.grid(column = 0, row = 2, ipadx = 0, ipady = 0)  
+        self.root.after(500, lambda:self.swapmeout()) 
+        #command=lambda lelem = elem: kpfunc(lelem)
+
+    def swapmeout(self):
+        if(self.stateofanim == 0):
+            self.label.configure(image = self.image2) 
+            self.stateofanim = 1
+        else:   
+            self.label.configure(image = self.image1) 
+            self.stateofanim = 0
+        self.root.after(500, lambda:self.swapmeout())  
+
 class keyboard:    
     def __init__(self):
         self.letters = []  
@@ -75,6 +102,8 @@ class keyboard:
             self.buttons[elem.getKey()] = bt
 
         #example of compositing use this for animated letters
+        self. ta = testAnim(frame, 2, 0)
+        '''
         img = Image.open('Assets/A.png').convert("RGBA")
         back = Image.open('Assets/Nope.png').convert("RGBA")
         c = Image.alpha_composite(back, img)
@@ -82,4 +111,5 @@ class keyboard:
         self.useme = ImageTk.PhotoImage(c)        # must keep a reference...wierd
         bt = tk.Button(frame, bd = 0, image=self.useme)
         #bt = tk.Button(frame, image=self.useme)
-        bt.grid(column = 0, row = 2)  
+        bt.grid(column = 0, row = 2, ipadx = 0, ipady = 0)  
+        '''

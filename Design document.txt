@@ -27,3 +27,38 @@ If we keep a similar Ratio...
 x= 571 - ish, So lets round up to 580 (Leaving a top banner of height 60 pixels)...perfect
 So our starting canvas needs to be 360 X 640
 
+
+
+
+
+================================
+Some example padding code
+import tkinter as tk
+
+app = tk.Tk()
+
+entryExample1 = tk.Entry(app)
+entryExample2 = tk.Entry(app)
+
+entryExample1.grid(row=0,
+               column=0,
+               padx=10,
+               pady=10,
+               ipady=30)
+
+entryExample2.grid(row=1,
+               column=0,
+               padx=10,
+               pady=10,
+               ipadx=20,
+               ipady=30)
+
+app.geometry("200x200")
+
+app.mainloop()
+
+The geometry of Tkinter Entry widget with grid method is as below,
+
+Tkinter Entry_width and height in grid method
+
+The actual width of the Tkinter Entry is 2*ipadx + Default Entry width, similarly the actual width of Entry is 2*ipady + Default Entry height.

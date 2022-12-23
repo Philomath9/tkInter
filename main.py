@@ -7,6 +7,8 @@ from gamelogic import *
 class App:      
     def __init__(self, root):
         self.root = root
+        self.root.geometry("360x640")
+        #self.root.resizable(0,0)
         self.keyboardObject = keyboard()
         self.gameObject = gameBoard()  
 
