@@ -75,8 +75,8 @@ class keyboard:
             self.buttons[elem.getKey()] = bt
 
         #example of compositing use this for animated letters
-        img = Image.open('A.png').convert("RGBA")
-        back = Image.open('Nope.png').convert("RGBA")
+        img = Image.open('Assets/A.png').convert("RGBA")
+        back = Image.open('Assets/Nope.png').convert("RGBA")
         c = Image.alpha_composite(back, img)
         #c.show()
         self.useme = ImageTk.PhotoImage(c)        # must keep a reference...wierd
