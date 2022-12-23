@@ -1,0 +1,29 @@
+Design document
+
+For the bottom keyboard we need 10 squarish cells
+for the bottom keyboard row we need 7 squares in the middle and two 1.5 (horizontaly wider) cells for enter and backspace
+
+For the game space we need area for 5 word guesses of length 4-7? With an 8th cell for indication of too long or too short of guesses
+
+Websites should transform responsively and fast at all screen resolutions on different browsers and platforms. Accessible. Mobile-friendly. 
+Design for your audience, first. Design from 360×640 through 1920×1080.
+
+For the 360 case we can divide the gameboard cells up 360 / 8 / 45, so 45 if no buffer around edges.
+With buffer 40 X 40 should be comfortable, which makes the game board part 40 X 8 320 pixels wide
+
+For the keyboard portion we need smaller cells.  360 / 10 = 36 with no buffer around the edges
+So...lets say 34? for 340 pixels total and a small buffer.
+
+This would make the required vertical space (not counting dividers and such.
+keyboard 34 X 3 = 102
+gameboard 40 X 5 = 200
+
+For a vertical requirement of 302 pixles.
+Asthetically this squarish-ness is not asthetic pleaseing
+Wordle uses 1170 X 1857 (Ratio from screenshot) and is asthetically pleaseing
+If we keep a similar Ratio...
+1170  360
+1857   X
+x= 571 - ish, So lets round up to 580 (Leaving a top banner of height 60 pixels)...perfect
+So our starting canvas needs to be 360 X 640
+
