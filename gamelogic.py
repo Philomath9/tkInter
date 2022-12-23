@@ -56,7 +56,7 @@ class gameState:
     def __init__(self):
         self.resetState()
     def resetState(self):
-        self.state = gameStates.WORDPICK
+        self.state = GameStates.WORDPICK
         self.guessNumber = 0
     def changeState(self, newstate):
         self.state = newstate

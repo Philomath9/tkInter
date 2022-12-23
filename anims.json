@@ -1,0 +1,21 @@
+{
+    "type": "animation",
+    "count":1,
+    "names":[
+        "unknownGame"
+    ],
+    "anims":[
+        {
+            "name": "unknownGame",
+            "framecount": 3,
+            "timings": [
+                333,333,333
+            ],
+            "files": [
+                "Assets/unknownGame1.png",
+                "Assets/unknownGame2.png",
+                "Assets/unknownGame3.png"
+            ]
+        }
+    ]
+}

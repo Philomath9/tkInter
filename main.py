@@ -24,7 +24,7 @@ class App:
  
     def keyPressed(self, keyElem):
         key = keyElem.getKey()        
-        if(not(self.gameObject.getState() == gameStates.WORDPICK)):
+        if(not(self.gameObject.getState() == GameStates.WORDPICK)):
             return # we are either in win or loss state here        
         if(key == 'ENTER'):
             if self.gameObject.enterButton():
@@ -32,13 +32,13 @@ class App:
                 # update the keyboard letter colors
                 states = self.gameObject.getKeyStates() # hey states are a dict with 'char' and UNKNOWN EXACT or CLOSE
                 self.keyboardObject.updateKeyStates(states)
-                if(self.gameObject.getState() == gameStates.WINNER):
+                if(self.gameObject.getState() == GameStates.WINNER):
                     ret = messagebox.askquestion("You win!","Another round?")
                     if ret == 'yes':
                         self.newWord()
                     else:
                         quit()
-                if(self.gameObject.getState() == gameStates.LOOSER):
+                if(self.gameObject.getState() == GameStates.LOOSER):
                     str = "The answer was " + self.gameObject.winword + "\nAnother round?"
                     ret = messagebox.askquestion("Cough...loser...cough!", str)
                     if ret == 'yes':

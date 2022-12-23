@@ -62,3 +62,18 @@ The geometry of Tkinter Entry widget with grid method is as below,
 Tkinter Entry_width and height in grid method
 
 The actual width of the Tkinter Entry is 2*ipadx + Default Entry width, similarly the actual width of Entry is 2*ipady + Default Entry height.
+
+
+, 
+        "notGame",
+        "closeGame", 
+        "leftGame", 
+        "rightGame", 
+        "exactGame", 
+        "shorterLength",
+        "longerLength",
+        "correctLength", 
+        "unknownKey", 
+        "notKey",
+        "closeKey", 
+        "exactKey"

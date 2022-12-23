@@ -2,10 +2,35 @@ import tkinter as tk
 from tkinter import ttk
 from gamelogic import *
 from states import *
+from PIL import Image, ImageTk
+import json
+
+class animatedBackground:
+    def __init__(self, root):
+        self.root = root
+
+        with open('anims.json', 'r') as anim_file:
+            fcc_data = json.load(anim_file)
+            print(fcc_data)
+
+        img = Image.open('Assets/A.png').convert("RGBA")
+        back = Image.open('Assets/Nope.png').convert("RGBA")
+        back2 = Image.open('Assets/Yup.png').convert("RGBA")
+        c = Image.alpha_composite(back, img)
+        d = Image.alpha_composite(back2, img)
+        self.stateofanim = 0
+        #c.show()
+        self.image1 = ImageTk.PhotoImage(c)        # must keep a reference...wierd
+        self.image2 = ImageTk.PhotoImage(d)        # must keep a reference...wierd
+class animatedLetter:
+    def __init__(self):
+        self.state = KeyStates.UNKNOWN
+
+    #def setLetter(self, letter):
 
 class wordGuess:
     def __init__(self):
-        self.word = ""
+        self.word = "" # EFJ we need to expand this bad boy
         self.state = []
         self.labels = []
         self.resetWord()
@@ -17,7 +42,7 @@ class wordGuess:
         self.word = ""
         self.state.clear()        
         for i in range(5):            
-            self.state.append(colorKeyStates.UNKNOWN)       
+            self.state.append(KeyStates.UNKNOWN)       
 
     def addChar(self, char):
         self.word += char
@@ -47,9 +72,9 @@ class gameBoard:
     def __init__(self):
         self.letterStates = {} # does not exist = unknown
         self.currentState = gameState()
-        self.words = []
+        self.words = [] # this is our list of guesses and is empty at the start
         for idx in range(6):
-            self.words.append(wordGuess())  
+            self.words.append(wordGuess())  # we are adding wordGuess the class which manages the words during and after guess is final
         self.winword = getNewWord()  
     def createGameboard(self, frame):            
         for guessNum in range(6):
@@ -74,11 +99,11 @@ class gameBoard:
     def updateLetterDictionary(self, letter, state):
         if letter in self.letterStates:
             old = self.letterStates[letter]
-            if old == colorKeyStates.NOT:
+            if old == KeyStates.NOT:
                 self.letterStates[letter] = state
-            elif state == colorKeyStates.EXACT:
+            elif state == KeyStates.EXACT:
                 self.letterStates[letter] = state
-            elif not (old == colorKeyStates.EXACT):
+            elif not (old == KeyStates.EXACT):
                 self.letterStates[letter] = state
         else:
             self.letterStates[letter] = state
@@ -91,25 +116,25 @@ class gameBoard:
             return False
         for idx in range(5):
             if self.winword[idx] == gword[idx]:
-                wordobj.state[idx] = colorKeyStates.EXACT
-                self.updateLetterDictionary(gword[idx], colorKeyStates.EXACT)                
+                wordobj.state[idx] = KeyStates.EXACT
+                self.updateLetterDictionary(gword[idx], KeyStates.EXACT)                
             else:
                 found = False                
                 for CH in self.winword:                    
                     if CH == gword[idx]:
-                        wordobj.state[idx] = colorKeyStates.CLOSE                        
-                        self.updateLetterDictionary(gword[idx], colorKeyStates.CLOSE)
+                        wordobj.state[idx] = KeyStates.CLOSE                        
+                        self.updateLetterDictionary(gword[idx], KeyStates.CLOSE)
                         found = True
                         break
                 if not found:
-                    wordobj.state[idx] = colorKeyStates.NOT
-                    self.updateLetterDictionary(gword[idx], colorKeyStates.NOT)
+                    wordobj.state[idx] = KeyStates.NOT
+                    self.updateLetterDictionary(gword[idx], KeyStates.NOT)
         wordobj.updateWord()
         if gword == self.winword:
-            self.currentState.changeState(gameStates.WINNER)
+            self.currentState.changeState(GameStates.WINNER)
         else:
             if self.currentState.getWordGuess() == 5:
-                self.currentState.changeState(gameStates.LOOSER)
+                self.currentState.changeState(GameStates.LOOSER)
             else:
                 self.currentState.nextGuess()
         return True
